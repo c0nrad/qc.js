@@ -260,7 +260,7 @@ export class AppComponent {
   };
 
   constructor(private ngZone: NgZone) {
-    this.simulate();
+    // this.simulate();
   }
 
   getGates(gateStr: string): Gate[] {
