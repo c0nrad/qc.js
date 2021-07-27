@@ -1,0 +1,19 @@
+{
+  "name": "qc",
+  "version": "1.0.0",
+  "description": "Quantum computation library",
+  "main": "index.js",
+  "scripts": {
+    "test": "ts-mocha  ./src/**/*.test.ts"
+  },
+  "author": "c0nrad",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.0.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.21",
+    "@types/mocha": "^8.2.3"
+  }
+}
