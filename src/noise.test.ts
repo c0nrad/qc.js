@@ -46,9 +46,9 @@ describe("noise class", () => {
     let c1 = new Circuit(1);
     c1.noise = noise;
 
-    c1.append(XGate);
+    c1.append(XGate, [0], []);
     for (let i = 0; i < 5; i++) {
-      c1.append(IdentityGate);
+      c1.append(IdentityGate, [0], []);
     }
 
     let results = c1.execute_many(100);

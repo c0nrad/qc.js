@@ -4,7 +4,7 @@ import { Complex } from "./complex";
 import { DensityMatrix } from "./density";
 import {
   MGate,
-  Projection,
+  BuildProjectionMatrix,
   QubitOneState,
   QubitZeroState,
   XGate,
@@ -131,7 +131,6 @@ export class DecoherenceNoise extends NoiseModel {
   constructor(T1: number, T2: number, Tg: number) {
     super();
 
-    console.log(T1, T2, Tg);
     if (T2 > 2 * T1) {
       throw new Error("invalid decoherence parameters");
     }
@@ -143,15 +142,13 @@ export class DecoherenceNoise extends NoiseModel {
     let p_z = ((1 - p_reset) * (1 - p_t2 / p_t1)) / 2;
     let p_i = 1 - p_z - p_reset;
 
-    console.log(p_reset, p_z, p_i);
-
     let m01 = QubitZeroState.mulMatrix(QubitOneState.transpose());
 
     this.operators = [];
     this.operators.push(identity(2).mulScalar(new Complex(Math.sqrt(p_i), 0)));
     this.operators.push(ZGate.matrix.mulScalar(new Complex(Math.sqrt(p_z), 0)));
     this.operators.push(
-      Projection([0]).matrix.mulScalar(new Complex(Math.sqrt(p_reset), 0))
+      BuildProjectionMatrix([0]).mulScalar(new Complex(Math.sqrt(p_reset), 0))
     );
     this.operators.push(m01.mulScalar(new Complex(Math.sqrt(p_reset), 0)));
 

@@ -1,38 +1,41 @@
 import { DensityMatrix } from "./density";
 import { Gate } from "./gates";
 import { Matrix } from "./matrix";
+import { Moment } from "./moment";
 import { DepolarizingNoise, Noiseless, NoiseModel } from "./noise";
 
-export class Moment {}
-
 export class Circuit {
-  moments: Gate[];
-  qubit_count: number;
+  moments: Moment[];
+  qubitCount: number;
   density: DensityMatrix;
 
   noise: NoiseModel;
 
   constructor(qubit_count: number) {
     this.moments = [];
-    this.qubit_count = qubit_count;
+    this.qubitCount = qubit_count;
     this.density = DensityMatrix.fromInitialState(Array(qubit_count).fill(0));
     this.noise = new Noiseless();
   }
 
   reset() {
     this.density = DensityMatrix.fromInitialState(
-      Array(this.qubit_count).fill(0)
+      Array(this.qubitCount).fill(0)
     );
   }
 
-  append(gate: Gate) {
-    this.moments.push(gate);
+  // insert(gate: Gate, momentIndex: number, qubit: number) {}
+
+  append(gate: Gate, gateIndexes: number[], controlIndexes: number[]) {
+    this.moments.push(
+      new Moment(gate, gateIndexes, controlIndexes, this.qubitCount)
+    );
   }
 
   execute(): number[] {
     this.density = this.noise.after_preparation(this.density);
-    for (let gate of this.moments) {
-      this.density = this.density.evolve(gate.matrix);
+    for (let moment of this.moments) {
+      this.density = this.density.evolve(moment.unitary);
       this.density = this.noise.after_gate(this.density);
     }
 

@@ -52,7 +52,10 @@ export class RandomizedBenchmarking {
         gates.push(random_gate);
         uncompute_gates.unshift(random_gate.inverse());
       }
-      c1.moments = gates.concat(uncompute_gates);
+      let allGates = gates.concat(uncompute_gates);
+      for (let g of allGates) {
+        c1.append(g, [0], []);
+      }
 
       if (c1.execute()[0] == 0) {
         this.results[depth_index] += 1;

@@ -100,7 +100,7 @@ export class Matrix {
     }
   }
 
-  assert_square() {
+  assertSquare() {
     if (this.width() != this.height()) {
       throw new Error(
         `Invalid square dimensions ${this.width()} ${this.height()}`
@@ -187,12 +187,12 @@ export class Matrix {
   }
 
   isUnitary(): boolean {
-    this.assert_square();
+    this.assertSquare();
     return this.mulMatrix(this.adjoint()).equals(identity(this.width()));
   }
 
   isHermitian(): boolean {
-    this.assert_square();
+    this.assertSquare();
     return this.adjoint().equals(this);
   }
 
@@ -232,6 +232,14 @@ export class Matrix {
 
     return new Matrix(out);
   }
+
+  qubitCount(): number {
+    return Math.log2(this.height());
+  }
+}
+
+export function buildIdentityMatrix(qubit_count: number): Matrix {
+  return identity(2 ** qubit_count);
 }
 
 export function identity(width: number): Matrix {

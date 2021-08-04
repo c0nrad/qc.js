@@ -134,8 +134,8 @@ export function MGate(state: number[]): Gate {
   return new Gate("M", out.mulMatrix(out.transpose()));
 }
 
-export function Projection(state: number[]): Gate {
-  return MGate(state);
+export function BuildProjectionMatrix(state: number[]): Matrix {
+  return MGate(state).matrix;
 }
 
 export let CliffordGates = [XGate, YGate, ZGate, HadamardGate];

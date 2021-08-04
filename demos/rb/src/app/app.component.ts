@@ -24,7 +24,10 @@ import { RandomizedBenchmarking } from "../../../../src/randomized_benchmarking"
         me know! c0nrad@c0nrad.io
       </div>
 
-      <p>This is a little tool to play with randomized benchmarking on simulated noisy circuits.</p>
+      <p>
+        This is a little tool to play with randomized benchmarking on simulated noisy circuits. To see it in action, click the 'Simulate' button on
+        the bottom of the page.
+      </p>
 
       <p>
         Randomized benchmarking is one of the simpler ways to characterize the amount of noise/error in a quantum computer. You take a quantum circuit
@@ -216,7 +219,9 @@ import { RandomizedBenchmarking } from "../../../../src/randomized_benchmarking"
           [shots]="model.shots"
         ></app-plot-rb-results>
       </div>
-      <div id="footer">Made with &#9829; by <a href="https://blog.c0nrad.io">blog.c0nrad.io</a></div>
+      <div id="footer">
+        Made with &#9829; by <a href="https://blog.c0nrad.io">blog.c0nrad.io</a>. <a href="https://github.com/c0nrad/qc.js">Source.</a>
+      </div>
     </div>
   `,
   styles: [],
